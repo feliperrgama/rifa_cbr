@@ -564,6 +564,8 @@
     const unavailableRaffleNumbers = new Set();
     let raffleAvailabilityLoaded = false;
     let raffleRefreshTimer = null;
+    let preparedContribution = false;
+    let preparedAmountCents = 0;
 
     function formatCurrency(cents) {
       return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
@@ -595,13 +597,15 @@
     }
 
     function updateTotal() {
-      totalAmount.textContent = formatCurrency(selectedTotal());
-      status.textContent = "";
+      totalAmount.textContent = formatCurrency(preparedContribution ? preparedAmountCents : selectedTotal());
     }
 
     function resetPreparedContribution() {
+      preparedContribution = false;
+      preparedAmountCents = 0;
       pixRow.hidden = true;
       status.textContent = "";
+      updateTotal();
     }
 
     function updateContributionFields() {
@@ -687,7 +691,6 @@
       if (selectedRaffleNumbers.has(number)) selectedRaffleNumbers.delete(number);
       else selectedRaffleNumbers.add(number);
       renderRaffleMap();
-      updateTotal();
       resetPreparedContribution();
     });
 
@@ -780,10 +783,12 @@
           }
           if (!response.ok) throw new Error(result.error || "Não foi possível reservar os números.");
           detail = `números ${numbers.join(", ")}`;
+          preparedContribution = true;
+          preparedAmountCents = amount;
           numbers.forEach((number) => unavailableRaffleNumbers.add(number));
           selectedRaffleNumbers.clear();
           renderRaffleMap();
-          totalAmount.textContent = formatCurrency(amount);
+          updateTotal();
         } else {
           const quantity = typeSelect.value === "doce" ? Number(sweetQuantity.value) : null;
           detail = quantity ? `${quantity} doce(s)` : "sua doação";
