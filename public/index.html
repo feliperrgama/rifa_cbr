@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071724">
+  <meta name="description" content="Apoie a equipe de robótica na viagem para a CBR Petrobras 2026, em João Pessoa. Participe da rifa, compre doces ou faça uma doação via Pix.">
+  <title>Rifa da Equipe de Robótica | Rumo à CBR 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #071724;
+      --ink-soft: #0d2231;
+      --ink-raised: #122d3e;
+      --blue: #8ddcff;
+      --blue-soft: #c5efff;
+      --cyan: #38d8dc;
+      --cyan-dark: #1ba6b8;
+      --white: #effaff;
+      --muted: #9bb2c1;
+      --line: rgba(191, 229, 246, .16);
+      --coral: #ff8c70;
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+      --content: 1160px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      color: var(--white);
+      background: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background-image: radial-gradient(rgba(161, 221, 247, .11) .7px, transparent .7px);
+      background-size: 22px 22px;
+      mask-image: linear-gradient(to bottom, black, transparent 65%);
+    }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button, a, input, select { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .wrap { width: min(var(--content), calc(100% - 48px)); margin-inline: auto; }
+    .mono { font-family: var(--mono); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cyan);
+      font: 500 11px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 20px; height: 1px; background: currentColor; content: ""; }
+    .site-header {
+      position: sticky;
+      z-index: 5;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 23, 36, .88);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(56, 216, 220, .55);
+      color: var(--cyan);
+      font: 500 12px var(--mono);
+      transform: rotate(-45deg);
+    }
+    .brand-mark span { transform: rotate(45deg); }
+    .brand-name { font-size: 13px; font-weight: 800; line-height: 1.2; }
+    .brand-name small { display: block; margin-top: 4px; color: var(--muted); font: 10px var(--mono); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--muted); font-size: 12px; font-weight: 600; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-cta { padding: 11px 16px; border: 1px solid var(--cyan); color: var(--cyan); }
+    .nav-links .nav-cta:hover { background: var(--cyan); color: var(--ink); }
+
+    .hero { padding: 72px 0 64px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 66px; }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero h1 { max-width: 650px; margin: 22px 0 18px; font-size: clamp(42px, 6vw, 76px); font-weight: 700; letter-spacing: -.055em; line-height: .99; }
+    .hero h1 em { color: var(--blue); font-style: normal; }
+    .hero-copy > p { max-width: 510px; margin: 0; color: #b2c7d3; font-size: 15px; line-height: 1.85; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 19px;
+      border: 1px solid var(--cyan);
+      background: var(--cyan);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background .2s, color .2s, transform .2s;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--blue-soft); border-color: var(--blue-soft); }
+    .text-link { color: var(--blue); font-size: 12px; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .hero-meta span { display: block; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+    .hero-meta strong { display: block; margin-top: 7px; color: var(--white); font-size: 12px; font-weight: 700; }
+    .hero-visual { position: relative; min-width: 0; }
+    .hero-photo {
+      position: relative;
+      height: 430px;
+      overflow: hidden;
+      border: 1px solid rgba(141, 220, 255, .3);
+      background: var(--ink-raised);
+      clip-path: polygon(0 0, 100% 0, 100% 91%, 90% 100%, 0 100%);
+    }
+    .hero-photo::after { position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(7, 23, 36, .8)); content: ""; }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.75) contrast(1.08); }
+    .photo-caption { position: absolute; z-index: 1; right: 20px; bottom: 24px; left: 22px; display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+    .photo-caption strong { font-size: 13px; }
+    .photo-caption span { color: var(--blue-soft); font: 10px var(--mono); text-align: right; }
+    .photo-coordinate { position: absolute; top: -15px; right: -13px; color: var(--cyan); font: 10px var(--mono); writing-mode: vertical-rl; }
+    .hero-index { position: absolute; bottom: -13px; left: -17px; display: grid; width: 74px; aspect-ratio: 1; place-items: center; border: 1px solid var(--cyan); background: var(--ink); color: var(--cyan); font: 12px var(--mono); }
+
+    .ticker { border-block: 1px solid var(--line); background: rgba(141, 220, 255, .045); }
+    .ticker-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .ticker-item { min-height: 82px; padding: 18px 24px; border-right: 1px solid var(--line); }
+    .ticker-item:first-child { padding-left: 0; }
+    .ticker-item:last-child { border-right: 0; }
+    .ticker-item span { display: block; color: var(--muted); font: 9px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .ticker-item strong { display: block; margin-top: 7px; color: var(--blue-soft); font-size: 14px; }
+
+    .section { padding: 104px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 38px; }
+    .section h2 { max-width: 670px; margin: 14px 0 0; font-size: clamp(30px, 4vw, 48px); font-weight: 700; letter-spacing: -.045em; line-height: 1.08; }
+    .section-head > p { max-width: 355px; margin: 0 0 3px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .event-layout { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .event-story { padding: 30px 42px 30px 0; }
+    .event-story p { max-width: 515px; margin: 0; color: #b2c7d3; font-size: 14px; line-height: 1.9; }
+    .event-story p + p { margin-top: 17px; }
+    .event-story strong { color: var(--white); }
+    .event-facts { display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid var(--line); }
+    .fact { display: flex; min-height: 126px; flex-direction: column; justify-content: space-between; padding: 20px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .fact:nth-child(even) { border-right: 0; }
+    .fact:nth-last-child(-n+2) { border-bottom: 0; }
+    .fact span { color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+    .fact strong { max-width: 220px; color: var(--blue-soft); font-size: 15px; line-height: 1.45; }
+    .event-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--cyan); font-size: 12px; font-weight: 700; text-decoration: none; }
+    .event-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .category-section { padding-top: 20px; }
+    .category-panel { position: relative; display: grid; grid-template-columns: .8fr 1.2fr; gap: 44px; padding: 38px; border: 1px solid var(--line); background: linear-gradient(110deg, rgba(141, 220, 255, .09), rgba(13, 34, 49, .28) 55%); }
+    .category-title { border-right: 1px solid var(--line); }
+    .category-title .number { color: var(--cyan); font: 11px var(--mono); }
+    .category-title h3 { max-width: 260px; margin: 22px 28px 0 0; color: var(--blue-soft); font-size: clamp(29px, 4vw, 43px); letter-spacing: -.05em; line-height: 1.04; }
+    .category-title p { margin: 14px 26px 0 0; color: var(--muted); font: 10px var(--mono); line-height: 1.7; text-transform: uppercase; }
+    .category-copy { display: flex; flex-direction: column; justify-content: center; }
+    .category-copy > p { margin: 0; color: #c0d1da; font-size: 14px; line-height: 1.85; }
+    .category-points { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 22px; margin: 22px 0 0; padding: 0; list-style: none; }
+    .category-points li { display: flex; align-items: start; gap: 9px; color: var(--blue-soft); font-size: 11px; line-height: 1.55; }
+    .category-points li::before { width: 6px; height: 6px; flex: 0 0 6px; margin-top: 5px; background: var(--cyan); content: ""; transform: rotate(45deg); }
+    .category-footnote { margin-top: 21px !important; color: var(--muted) !important; font-size: 10px !important; }
+
+    .fundraiser { position: relative; padding: 82px 0 90px; overflow: hidden; background: #d8f2fb; color: var(--ink); }
+    .fundraiser::before { position: absolute; top: -115px; right: -95px; width: 390px; aspect-ratio: 1; border: 1px solid rgba(7, 23, 36, .12); border-radius: 50%; box-shadow: 0 0 0 34px rgba(7, 23, 36, .025), 0 0 0 70px rgba(7, 23, 36, .025); content: ""; }
+    .fundraiser-grid { position: relative; display: grid; grid-template-columns: .8fr 1.2fr; align-items: start; gap: 62px; }
+    .fundraiser .eyebrow { color: #117d94; }
+    .fundraiser .eyebrow::before { background: currentColor; }
+    .fundraiser h2 { max-width: 390px; margin: 16px 0 15px; font-size: clamp(35px, 4.6vw, 54px); font-weight: 700; letter-spacing: -.06em; line-height: 1.02; }
+    .fundraiser-intro { max-width: 380px; margin: 0; color: #315262; font-size: 13px; line-height: 1.8; }
+    .prize { max-width: 380px; margin-top: 32px; padding-top: 18px; border-top: 1px solid rgba(7, 23, 36, .2); }
+    .prize > span { color: #537180; font: 10px var(--mono); text-transform: uppercase; }
+    .prize strong { display: block; margin-top: 6px; font-size: 28px; letter-spacing: -.04em; }
+    .prize p { margin: 7px 0 0; color: #315262; font-size: 11px; line-height: 1.65; }
+    .form-shell { padding: 29px; border: 1px solid rgba(7, 23, 36, .18); background: rgba(255, 255, 255, .56); }
+    .form-heading { display: flex; align-items: start; justify-content: space-between; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid rgba(7, 23, 36, .15); }
+    .form-heading h3 { margin: 0; font-size: 17px; font-weight: 800; }
+    .form-heading p { margin: 6px 0 0; color: #537180; font-size: 10px; }
+    .step-label { color: #117d94; font: 10px var(--mono); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 14px; padding: 20px 0; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { display: block; margin-bottom: 7px; color: #315262; font-size: 10px; font-weight: 800; }
+    .field input, .field select {
+      display: block;
+      width: 100%;
+      height: 44px;
+      padding: 0 12px;
+      border: 1px solid rgba(7, 23, 36, .2);
+      border-radius: 0;
+      background: rgba(255, 255, 255, .75);
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .field input::placeholder { color: #7b929d; }
+    .field input:focus, .field select:focus { border-color: #117d94; outline: 2px solid rgba(17, 125, 148, .18); }
+    .field input[readonly] { background: rgba(7, 23, 36, .055); color: #315262; }
+    .field-hint { display: block; margin-top: 6px; color: #59717d; font-size: 9px; line-height: 1.5; }
+    .conditional { display: none; grid-column: 1 / -1; }
+    .conditional.is-visible { display: block; }
+    .raffle-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .raffle-map-heading strong { color: #315262; font-size: 11px; }
+    .raffle-map-heading span { color: #59717d; font-size: 10px; }
+    .raffle-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; padding: 0; list-style: none; }
+    .raffle-legend li { display: flex; align-items: center; gap: 6px; color: #315262; font-size: 9px; }
+    .legend-swatch { width: 11px; height: 11px; border: 1px solid rgba(7, 23, 36, .2); background: #fff; }
+    .legend-swatch.selected { border-color: #278c56; background: #61c98b; }
+    .legend-swatch.unavailable { border-color: #bd3e47; background: #e86c6c; }
+    .raffle-map { display: grid; max-height: 235px; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 5px; overflow-y: auto; padding: 2px 4px 2px 2px; }
+    .raffle-number { min-width: 0; aspect-ratio: 1; padding: 0; border: 1px solid rgba(7, 23, 36, .18); background: #fff; color: var(--ink); font: 10px var(--mono); cursor: pointer; }
+    .raffle-number:hover:not(:disabled) { border-color: #117d94; }
+    .raffle-number.is-selected { border-color: #278c56; background: #61c98b; color: #08351d; }
+    .raffle-number.is-unavailable { border-color: #bd3e47; background: #e86c6c; color: #fff; cursor: not-allowed; }
+    .raffle-number:disabled { opacity: 1; }
+    .conditional .field { display: grid; grid-template-columns: 1fr minmax(120px, .65fr); align-items: start; gap: 8px 14px; }
+    .conditional .field label { grid-column: 1 / -1; margin-bottom: 0; }
+    .conditional .field-hint { grid-column: 1 / -1; margin-top: -3px; }
+    .total-line { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 0; border-top: 1px solid rgba(7, 23, 36, .15); }
+    .total-line span { color: #315262; font-size: 11px; font-weight: 700; }
+    .total-line strong { font: 500 21px var(--mono); }
+    .pix-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 15px; padding: 15px; background: var(--ink); color: var(--white); }
+    .pix-row[hidden] { display: none; }
+    .pix-row span { display: block; color: var(--muted); font: 9px var(--mono); text-transform: uppercase; }
+    .pix-row strong { display: block; margin-top: 5px; color: var(--blue-soft); font: 13px var(--mono); }
+    .copy-button { min-height: 38px; padding: 0 11px; border: 1px solid rgba(141, 220, 255, .55); background: transparent; color: var(--blue-soft); font-size: 10px; font-weight: 800; cursor: pointer; }
+    .copy-button:hover { background: rgba(141, 220, 255, .12); }
+    .form-note { margin: 12px 0 0; color: #59717d; font-size: 9px; line-height: 1.65; }
+    .submit-button { width: 100%; margin-top: 16px; border: 0; }
+    .form-status { min-height: 20px; margin: 11px 0 0; color: #126b71; font-size: 10px; line-height: 1.6; }
+    .form-status:empty { min-height: 0; margin: 0; }
+
+    .team-section { padding: 88px 0 92px; }
+    .team-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 60px; }
+    .team-section h2 { max-width: 430px; margin: 14px 0; font-size: clamp(32px, 4vw, 46px); letter-spacing: -.05em; line-height: 1.05; }
+    .team-section p { max-width: 440px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.85; }
+    .roster { padding: 25px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .roster-label { color: var(--cyan); font: 10px var(--mono); text-transform: uppercase; }
+    .roster-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 17px; }
+    .roster-name { padding: 8px 10px; border: 1px solid var(--line); color: var(--blue-soft); font-size: 10px; }
+    .roster-empty { margin-top: 14px !important; font-size: 10px !important; }
+    .site-footer { padding: 21px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 9px; }
+    .footer-inner a { color: var(--blue); text-decoration: none; }
+    .footer-inner a:hover { text-decoration: underline; }
+
+    @media (max-width: 850px) {
+      .hero-grid { gap: 35px; }
+      .hero-photo { height: 360px; }
+      .fundraiser-grid { grid-template-columns: .7fr 1.3fr; gap: 32px; }
+      .category-panel { gap: 28px; padding: 28px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 36px, var(--content)); }
+      .fundraiser-grid { grid-template-columns: minmax(0, 1fr); }
+      .form-shell { min-width: 0; }
+      .nav { min-height: 66px; }
+      .nav-links { gap: 0; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-links .nav-cta { padding: 10px 12px; font-size: 10px; }
+      .hero { padding: 53px 0 47px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 39px; }
+      .hero h1 { max-width: 490px; font-size: clamp(43px, 12vw, 64px); }
+      .hero-copy > p { font-size: 13px; }
+      .hero-meta { gap: 17px 24px; margin-top: 31px; }
+      .hero-photo { height: min(88vw, 380px); }
+      .photo-coordinate { right: 0; }
+      .ticker-inner { grid-template-columns: 1fr 1fr; }
+      .ticker-item { min-height: 74px; padding: 16px 13px; border-bottom: 1px solid var(--line); }
+      .ticker-item:first-child { padding-left: 13px; }
+      .ticker-item:nth-child(2) { border-right: 0; }
+      .ticker-item:nth-last-child(-n+2) { border-bottom: 0; }
+      .ticker-item strong { font-size: 12px; }
+      .section { padding: 74px 0; }
+      .section-head { display: block; margin-bottom: 26px; }
+      .section-head > p { margin-top: 14px; }
+      .event-layout { grid-template-columns: 1fr; }
+      .event-story { padding: 23px 0 27px; }
+      .event-story p { font-size: 12px; }
+      .event-facts { border-top: 1px solid var(--line); border-left: 0; }
+      .fact { min-height: 105px; padding: 15px 13px; }
+      .fact strong { font-size: 12px; }
+      .category-section { padding-top: 0; }
+      .category-panel { grid-template-columns: 1fr; gap: 22px; padding: 23px; }
+      .category-title { padding-bottom: 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .category-title h3 { max-width: none; margin: 14px 0 0; }
+      .category-title p { margin: 8px 0 0; }
+      .category-copy > p { font-size: 12px; }
+      .category-points { gap: 11px; }
+      .category-points li { font-size: 10px; }
+      .fundraiser { padding: 62px 0 68px; }
+      .fundraiser-grid { grid-template-columns: 1fr; gap: 30px; }
+      .fundraiser h2 { max-width: 420px; font-size: 44px; }
+      .form-shell { padding: 20px 16px; }
+      .team-section { padding: 66px 0; }
+      .team-grid { grid-template-columns: 1fr; gap: 28px; }
+      .roster { padding: 19px 0; }
+      .footer-inner { align-items: start; flex-direction: column; gap: 8px; }
+      .raffle-map { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+    }
+    @media (max-width: 390px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full, .conditional { grid-column: auto; }
+      .conditional .field { grid-template-columns: 1fr; }
+      .conditional .field label, .conditional .field-hint { grid-column: auto; }
+      .hero-actions { gap: 16px; }
+      .hero-actions .button { width: 100%; }
+      .category-points { grid-template-columns: 1fr; }
+      .raffle-map { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Equipe de Robótica, início">
+        <span class="brand-mark" aria-hidden="true"><span>CRbot</span></span>
+        <span class="brand-name">EQUIPE DE ROBÓTICA<small>RUMO À CBR 2026</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#competicao">A competição</a>
+        <a href="#categoria">Nossa categoria</a>
+        <a class="nav-cta" href="#contribuir">Apoiar a equipe <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-grid wrap">
+        <div class="hero-copy">
+          <span class="eyebrow">Uma viagem feita em equipe</span>
+          <h1>Da Vitória da Conquista até <em>João Pessoa.</em></h1>
+          <p>Estamos arrecadando para levar nosso projeto à Competição Brasileira de Robótica. Cada rifa, doce ou doação ajuda a transformar meses de trabalho em uma experiência que pode mudar o nosso caminho.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contribuir">Quero contribuir <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="https://cbr.robocup.org.br/" target="_blank" rel="noreferrer">Conheça a CBR 2026 ↗</a>
+          </div>
+          <div class="hero-meta">
+            <div><span>Destino</span><strong>João Pessoa · PB</strong></div>
+            <div><span>Competição</span><strong>CBR Petrobras 2026</strong></div>
+            <div><span>Nossa modalidade</span><strong>RCB Challenge</strong></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <span class="photo-coordinate">07° 09′ S / 34° 51′ W</span>
+          <figure class="hero-photo">
+            <img src="https://cbr.robocup.org.br/wp-content/uploads/2020/08/IMG_9773.jpg" alt="Registro de uma edição da Competição Brasileira de Robótica" fetchpriority="high">
+            <figcaption class="photo-caption"><strong>Ciência que ganha o mundo.</strong><span>ARQUIVO · CBR</span></figcaption>
+          </figure>
+          <span class="hero-index" aria-hidden="true">CBR<br>25</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Informações da competição">
+      <div class="ticker-inner wrap">
+        <div class="ticker-item"><span>Quando</span><strong>23 a 29 nov. 2026</strong></div>
+        <div class="ticker-item"><span>Onde</span><strong>João Pessoa, Paraíba</strong></div>
+        <div class="ticker-item"><span>Evento</span><strong>Robótica 2026</strong></div>
+        <div class="ticker-item"><span>Entrada para o público</span><strong>Gratuita</strong></div>
+      </div>
+    </div>
+
+    <section class="section" id="competicao">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">Um encontro de ideias e tecnologia</span><h2>O que é a CBR Petrobras?</h2></div>
+          <p>Um dos grandes encontros de robótica e inteligência artificial da América Latina, realizado dentro do evento Robótica 2026.</p>
+        </div>
+        <div class="event-layout">
+          <div class="event-story">
+            <p>A <strong>Competição Brasileira de Robótica</strong> reúne estudantes e pesquisadores para colocar robôs autônomos à prova em desafios inspirados no mundo real. Futebol de robôs, robôs de serviço e desafios de navegação são algumas das modalidades.</p>
+            <p>Em 2026, o evento acontece em João Pessoa e também reúne a Mostra Nacional de Robótica, a Olimpíada Brasileira de Robótica e congressos científicos. Uma semana inteira para compartilhar projetos, aprender e encontrar novas possibilidades.</p>
+            <a class="event-link" href="https://cbr.robocup.org.br/" target="_blank" rel="noreferrer">Acessar o site oficial da CBR <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="event-facts" aria-label="Dados sobre a competição">
+            <div class="fact"><span>01 / Datas</span><strong>23–29 de novembro de 2026</strong></div>
+            <div class="fact"><span>02 / Local</span><strong>Centro de Convenções de João Pessoa</strong></div>
+            <div class="fact"><span>03 / Formato</span><strong>Disputas presenciais e remotas</strong></div>
+            <div class="fact"><span>04 / Também no evento</span><strong>MNR, OBR e encontros científicos</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section category-section" id="categoria">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">O desafio que escolhemos</span><h2>Uma ideia pode virar robô.</h2></div>
+          <p>Na nossa categoria, criatividade, colaboração e experimentação têm espaço para andar lado a lado.</p>
+        </div>
+        <div class="category-panel">
+          <div class="category-title">
+            <span class="number">CATEGORIA</span>
+            <h3>RCB<br>Challenge</h3>
+            <p>Hardware livre · criação sem barreiras</p>
+          </div>
+          <div class="category-copy">
+            <p>Um desafio aberto e inclusivo que aproxima estudantes do ensino fundamental à pós-graduação. Cada equipe desenvolve um robô e apresenta sua solução, compartilhando ideias com pessoas em diferentes etapas de aprendizado.</p>
+            <ul class="category-points">
+              <li>Sem limite de idade ou escolaridade</li>
+              <li>Microcontroladores e kits à escolha</li>
+              <li>Sensores e atuadores de livre escolha</li>
+              <li>Foco em eletrônica embarcada e programação</li>
+            </ul>
+            <p class="category-footnote">Desde 2025, a categoria adota o conceito de hardware livre. Câmeras, LiDAR e sensores similares não são permitidos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-section" id="equipe">
+      <div class="team-grid wrap">
+        <div>
+          <span class="eyebrow">Por trás de cada circuito</span>
+          <h2>Somos estudantes, makers e uma equipe.</h2>
+          <p>Um grupo que aprende fazendo: pesquisa, testa, erra, ajusta e constrói junto. Agora, queremos levar nosso trabalho até a CBR e representar a nossa comunidade.</p>
+        </div>
+        <div class="roster">
+          <span class="roster-label">Quem está construindo esse projeto</span>
+          <div class="roster-list" id="roster-list"></div>
+          <p class="roster-empty" id="roster-empty">Os nomes dos integrantes serão adicionados pela equipe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fundraiser" id="contribuir">
+      <div class="fundraiser-grid wrap">
+        <div>
+          <span class="eyebrow">A sua ajuda coloca a equipe na estrada</span>
+          <h2>Escolha como fazer parte.</h2>
+          <p class="fundraiser-intro">A arrecadação ajuda a pagar transporte, hospedagem, alimentação e outras despesas da equipe durante a competição. <strong>Nós iremos prestar conta a vocês de todo o dinheiro arrecadado nesta campanha</strong></p>
+          <div class="prize">
+            <span>Na rifa, você concorre a</span>
+            <strong>R$ 250,00</strong>
+            <p>Escolha um gift card de jogos, conforme disponibilidade, ou receba o prêmio em dinheiro. O sorteio acontece após a venda das 300 fichas; data e método serão informados aos participantes.</p>
+          </div>
+        </div>
+
+        <div class="form-shell">
+          <div class="form-heading">
+            <div><h3>Contribuição da equipe</h3><p>Preencha seus dados e escolha uma opção.</p></div>
+            <span class="step-label">PIX · 01/01</span>
+          </div>
+          <form id="contribution-form">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="full-name">Nome completo *</label>
+                <input id="full-name" name="name" type="text" autocomplete="name" placeholder="Como podemos chamar você?" required minlength="3">
+              </div>
+              <div class="field">
+                <label for="email">E-mail *</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@email.com" required>
+              </div>
+              <div class="field">
+                <label for="phone">Celular / WhatsApp *</label>
+                <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 0 0000-0000" maxlength="17" aria-describedby="phone-hint" required>
+                <span class="field-hint" id="phone-hint">DDD + número com 9 dígitos.</span>
+              </div>
+              <div class="field full">
+                <label for="contribution-type">Como deseja contribuir? *</label>
+                <select id="contribution-type" name="type" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="rifa">Rifa · R$ 12,00 por número</option>
+                  <option value="doacao">Doação · valor livre</option>
+                  <option value="doce">Doces · R$ 2,00 por unidade</option>
+                </select>
+              </div>
+              <div class="conditional" id="raffle-fields">
+                <div class="raffle-map-heading"><strong>Escolha seus números</strong><span id="raffle-selection-count" aria-live="polite">0 selecionados</span></div>
+                <ul class="raffle-legend" aria-label="Legenda dos números">
+                  <li><span class="legend-swatch" aria-hidden="true"></span>Disponível</li>
+                  <li><span class="legend-swatch selected" aria-hidden="true"></span>Selecionado</li>
+                  <li><span class="legend-swatch unavailable" aria-hidden="true"></span>Indisponível</li>
+                </ul>
+                <div class="raffle-map" id="raffle-map" role="group" aria-label="Números da rifa de 0 a 300"></div>
+                <span class="field-hint" id="raffle-map-status" role="status" aria-live="polite">Carregue a disponibilidade dos números.</span>
+              </div>
+              <div class="conditional" id="donation-fields">
+                <div class="field">
+                  <label for="donation-amount">Valor da doação *</label>
+                  <input id="donation-amount" name="donationAmount" type="text" inputmode="numeric" placeholder="R$ 0,00" autocomplete="off">
+                  <span class="field-hint">Digite os números; o formato em reais é aplicado automaticamente.</span>
+                </div>
+              </div>
+              <div class="conditional" id="sweet-fields">
+                <div class="field">
+                  <label for="sweet-quantity">Quantidade de doces *</label>
+                  <input id="sweet-quantity" name="sweetQuantity" type="number" min="1" max="999" step="1" value="1" inputmode="numeric">
+                  <span class="field-hint">Valor por unidade: <span id="sweet-unit-label">R$ 2,00</span>.</span>
+                </div>
+              </div>
+            </div>
+            <div class="total-line" aria-live="polite"><span>Valor da contribuição</span><strong id="total-amount">R$ 0,00</strong></div>
+            <div class="pix-row" id="pix-row" hidden>
+              <div><span>Chave Pix · celular</span><strong id="pix-key">73 99964 0225</strong></div>
+              <button class="copy-button" id="copy-pix" type="button">Copiar chave</button>
+            </div>
+            <p class="form-note">Ao preparar sua contribuição, os números selecionados ficam reservados. Depois, faça o Pix no seu aplicativo bancário e envie o comprovante para a equipe. Este formulário não processa pagamentos.</p>
+            <button class="button submit-button" type="submit">Preparar minha contribuição <span aria-hidden="true">→</span></button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner wrap">
+      <span>Rifa solidária · Equipe de Robótica · 2026</span>
+      <a href="https://cbr.robocup.org.br/" target="_blank" rel="noreferrer">CBR Petrobras ↗</a>
+      <span>Feito para chegar mais longe, junto.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Edite estes dados quando receber a lista final da equipe e o valor dos doces.
+    const TEAM_MEMBERS = ["Felipe Gama", "Rute Linhares"];
+    const SWEET_UNIT_PRICE_CENTS = 200;
+    const RAFFLE_UNIT_PRICE_CENTS = 1200;
+    const PIX_KEY = "73 99964 0225";
+    const RAFFLE_NUMBER_MAX = 300;
+
+    const form = document.querySelector("#contribution-form");
+    const typeSelect = document.querySelector("#contribution-type");
+    const raffleFields = document.querySelector("#raffle-fields");
+    const donationFields = document.querySelector("#donation-fields");
+    const sweetFields = document.querySelector("#sweet-fields");
+    const donationAmount = document.querySelector("#donation-amount");
+    const sweetQuantity = document.querySelector("#sweet-quantity");
+    const totalAmount = document.querySelector("#total-amount");
+    const status = document.querySelector("#form-status");
+    const pixRow = document.querySelector("#pix-row");
+    const phone = document.querySelector("#phone");
+    const raffleMap = document.querySelector("#raffle-map");
+    const raffleMapStatus = document.querySelector("#raffle-map-status");
+    const raffleSelectionCount = document.querySelector("#raffle-selection-count");
+    const selectedRaffleNumbers = new Set();
+    const unavailableRaffleNumbers = new Set();
+    let raffleAvailabilityLoaded = false;
+    let raffleRefreshTimer = null;
+
+    function formatCurrency(cents) {
+      return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
+    }
+
+    function centsFromDigits(value) {
+      const digits = value.replace(/\D/g, "");
+      return digits ? Number(digits) : 0;
+    }
+
+    function setConditional(container, visible, input) {
+      container.classList.toggle("is-visible", visible);
+      if (input) {
+        input.required = visible;
+        input.disabled = !visible;
+      }
+    }
+
+    function selectedTotal() {
+      if (typeSelect.value === "rifa") {
+        return selectedRaffleNumbers.size * RAFFLE_UNIT_PRICE_CENTS;
+      }
+      if (typeSelect.value === "doacao") return centsFromDigits(donationAmount.value);
+      if (typeSelect.value === "doce") {
+        const quantity = Number(sweetQuantity.value);
+        return Number.isInteger(quantity) && quantity > 0 && quantity <= 999 ? quantity * SWEET_UNIT_PRICE_CENTS : 0;
+      }
+      return 0;
+    }
+
+    function updateTotal() {
+      totalAmount.textContent = formatCurrency(selectedTotal());
+      status.textContent = "";
+    }
+
+    function resetPreparedContribution() {
+      pixRow.hidden = true;
+      status.textContent = "";
+    }
+
+    function updateContributionFields() {
+      const type = typeSelect.value;
+      setConditional(raffleFields, type === "rifa");
+      setConditional(donationFields, type === "doacao", donationAmount);
+      setConditional(sweetFields, type === "doce", sweetQuantity);
+      updateRaffleRefresh();
+      updateTotal();
+    }
+
+    function renderRaffleMap() {
+      if (raffleMap.childElementCount !== RAFFLE_NUMBER_MAX + 1) {
+        const fragment = document.createDocumentFragment();
+        for (let number = 0; number <= RAFFLE_NUMBER_MAX; number += 1) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "raffle-number";
+          button.dataset.number = String(number);
+          button.textContent = String(number);
+          fragment.append(button);
+        }
+        raffleMap.append(fragment);
+      }
+
+      Array.from(raffleMap.children).forEach((button, number) => {
+        const unavailable = unavailableRaffleNumbers.has(number);
+        const selected = selectedRaffleNumbers.has(number) && !unavailable;
+        button.className = "raffle-number";
+        button.setAttribute("aria-label", `Número ${number} ${unavailable ? "indisponível" : selected ? "selecionado" : "disponível"}`);
+        button.setAttribute("aria-pressed", String(selected));
+        button.disabled = unavailable || !raffleAvailabilityLoaded;
+        if (unavailable) button.classList.add("is-unavailable");
+        else if (selected) button.classList.add("is-selected");
+      });
+      const count = selectedRaffleNumbers.size;
+      raffleSelectionCount.textContent = `${count} ${count === 1 ? "selecionado" : "selecionados"}`;
+    }
+
+    async function loadRaffleAvailability() {
+      if (!raffleAvailabilityLoaded) {
+        raffleMapStatus.textContent = "Carregando números disponíveis...";
+        renderRaffleMap();
+      }
+      try {
+        const response = await fetch("/api/raffle/numbers");
+        if (!response.ok) throw new Error("Não foi possível consultar os números.");
+        const data = await response.json();
+        unavailableRaffleNumbers.clear();
+        data.unavailableNumbers.forEach((number) => unavailableRaffleNumbers.add(number));
+        selectedRaffleNumbers.forEach((number) => {
+          if (unavailableRaffleNumbers.has(number)) selectedRaffleNumbers.delete(number);
+        });
+        raffleAvailabilityLoaded = true;
+        raffleMapStatus.textContent = "Selecione um ou mais números. Cada número custa R$ 12,00.";
+      } catch {
+        if (!raffleAvailabilityLoaded) {
+          raffleMapStatus.textContent = "Não foi possível carregar a rifa. Tente novamente em instantes.";
+        }
+      }
+      renderRaffleMap();
+      updateTotal();
+    }
+
+    function updateRaffleRefresh() {
+      if (typeSelect.value === "rifa") {
+        if (!raffleAvailabilityLoaded) loadRaffleAvailability();
+        if (!raffleRefreshTimer) {
+          raffleRefreshTimer = window.setInterval(() => {
+            if (!document.hidden) loadRaffleAvailability();
+          }, 5000);
+        }
+      } else if (raffleRefreshTimer) {
+        window.clearInterval(raffleRefreshTimer);
+        raffleRefreshTimer = null;
+      }
+    }
+
+    raffleMap.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-number]");
+      if (!button || button.disabled) return;
+      const number = Number(button.dataset.number);
+      if (selectedRaffleNumbers.has(number)) selectedRaffleNumbers.delete(number);
+      else selectedRaffleNumbers.add(number);
+      renderRaffleMap();
+      updateTotal();
+      resetPreparedContribution();
+    });
+
+    function maskPhone(value) {
+      const digits = value.replace(/\D/g, "").slice(0, 11);
+      if (!digits) return "";
+      let result = "(" + digits.slice(0, 2);
+      if (digits.length >= 3) result += ") " + digits.slice(2, 3);
+      if (digits.length >= 4) result += " " + digits.slice(3, 7);
+      if (digits.length >= 8) result += "-" + digits.slice(7, 11);
+      return result;
+    }
+
+    function formatDonationInput() {
+      const cents = centsFromDigits(donationAmount.value);
+      donationAmount.value = cents ? formatCurrency(cents) : "";
+      updateTotal();
+    }
+
+    document.querySelector("#sweet-unit-label").textContent = formatCurrency(SWEET_UNIT_PRICE_CENTS);
+    document.querySelector("#pix-key").textContent = PIX_KEY;
+    typeSelect.addEventListener("change", updateContributionFields);
+    form.addEventListener("input", resetPreparedContribution);
+    form.addEventListener("change", resetPreparedContribution);
+    sweetQuantity.addEventListener("input", updateTotal);
+    donationAmount.addEventListener("input", formatDonationInput);
+    phone.addEventListener("input", () => {
+      phone.value = maskPhone(phone.value);
+      phone.setCustomValidity(phone.value.replace(/\D/g, "").length === 11 ? "" : "Digite DDD e os 9 dígitos do celular.");
+    });
+
+    document.querySelector("#copy-pix").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      try {
+        await navigator.clipboard.writeText(PIX_KEY);
+        button.textContent = "Chave copiada";
+      } catch {
+        const temporary = document.createElement("textarea");
+        temporary.value = PIX_KEY;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.opacity = "0";
+        document.body.append(temporary);
+        temporary.select();
+        const copied = document.execCommand("copy");
+        temporary.remove();
+        button.textContent = copied ? "Chave copiada" : "Copie manualmente";
+      }
+      window.setTimeout(() => { button.textContent = "Copiar chave"; }, 2200);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const amount = selectedTotal();
+      if (!amount) {
+        status.textContent = typeSelect.value === "rifa" ? "Selecione pelo menos um número disponível." : "Informe um valor maior que zero para continuar.";
+        return;
+      }
+      const name = document.querySelector("#full-name").value.trim();
+      const submitButton = form.querySelector(".submit-button");
+      submitButton.disabled = true;
+      try {
+        let detail;
+        if (typeSelect.value === "rifa") {
+          if (!raffleAvailabilityLoaded) {
+            status.textContent = "Aguarde o carregamento da disponibilidade da rifa.";
+            return;
+          }
+          const numbers = [...selectedRaffleNumbers].sort((left, right) => left - right);
+          const response = await fetch("/api/raffle/reservations", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email: document.querySelector("#email").value.trim(),
+              phone: phone.value,
+              numbers
+            })
+          });
+          const result = await response.json();
+          if (response.status === 409) {
+            result.unavailableNumbers.forEach((number) => {
+              unavailableRaffleNumbers.add(number);
+              selectedRaffleNumbers.delete(number);
+            });
+            raffleMapStatus.textContent = `Os números ${result.unavailableNumbers.join(", ")} acabaram de ser reservados. Escolha outros.`;
+            renderRaffleMap();
+            updateTotal();
+            return;
+          }
+          if (!response.ok) throw new Error(result.error || "Não foi possível reservar os números.");
+          detail = `números ${numbers.join(", ")}`;
+          numbers.forEach((number) => unavailableRaffleNumbers.add(number));
+          selectedRaffleNumbers.clear();
+          renderRaffleMap();
+          totalAmount.textContent = formatCurrency(amount);
+        } else {
+          const quantity = typeSelect.value === "doce" ? Number(sweetQuantity.value) : null;
+          detail = quantity ? `${quantity} doce(s)` : "sua doação";
+        }
+        pixRow.hidden = false;
+        status.textContent = `Obrigado, ${name}! Sua contribuição de ${formatCurrency(amount)} (${detail}) está pronta. Faça o Pix para ${PIX_KEY} e envie o comprovante à equipe para confirmar.`;
+      } catch (error) {
+        status.textContent = error.message || "Não foi possível preparar sua contribuição. Tente novamente.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    const rosterList = document.querySelector("#roster-list");
+    const rosterEmpty = document.querySelector("#roster-empty");
+    TEAM_MEMBERS.filter((name) => name.trim()).forEach((name) => {
+      const item = document.createElement("span");
+      item.className = "roster-name";
+      item.textContent = name;
+      rosterList.append(item);
+    });
+    rosterEmpty.hidden = TEAM_MEMBERS.some((name) => name.trim());
+    renderRaffleMap();
+    updateContributionFields();
+  </script>
+</body>
+</html>
