@@ -1,0 +1,15 @@
+{
+  "name": "rifa-equipe-robotica",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site de arrecadação com reservas da rifa em Cloudflare Workers e D1",
+  "scripts": {
+    "dev": "wrangler dev --persist-to ../.rifa-wrangler-state",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 execute rifa-db --local --persist-to ../.rifa-wrangler-state --file=./schema.sql",
+    "db:remote": "wrangler d1 execute rifa-db --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.143.0"
+  }
+}
