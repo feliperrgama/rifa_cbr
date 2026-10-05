@@ -11,4 +11,4 @@ run_worker_first = ["/api/*"]
 binding = "DB"
 database_name = "rifa-db"
 # Substitua pelo database_id retornado por `npx wrangler d1 create rifa-db`.
-database_id = "PREENCHER_APOS_CRIAR_O_D1"
+database_id = "e6bc6f95-7de5-4674-ae3d-de6547a386c1"
