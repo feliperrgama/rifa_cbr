@@ -250,6 +250,19 @@
     .form-status { min-height: 20px; margin: 11px 0 0; color: #126b71; font-size: 10px; line-height: 1.6; }
     .form-status:empty { min-height: 0; margin: 0; }
 
+    .pix-instructions { padding: 68px 0 76px; border-top: 1px solid var(--line); background: var(--ink-soft); }
+    .pix-instructions h2 { max-width: 720px; margin: 14px 0 12px; font-size: clamp(29px, 4vw, 43px); letter-spacing: -.04em; line-height: 1.1; }
+    .pix-instructions-intro { max-width: 760px; margin: 0; color: #b2c7d3; font-size: 13px; line-height: 1.8; }
+    .pix-instructions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; margin-top: 30px; }
+    .pix-instructions-list { display: grid; gap: 17px; margin: 0; padding: 0; list-style: none; counter-reset: pix-step; }
+    .pix-instructions-list li { position: relative; min-height: 34px; padding-left: 45px; color: #c0d1da; font-size: 12px; line-height: 1.75; counter-increment: pix-step; }
+    .pix-instructions-list li::before { position: absolute; top: 0; left: 0; display: grid; width: 30px; aspect-ratio: 1; place-items: center; border: 1px solid var(--cyan); color: var(--cyan); content: counter(pix-step, decimal-leading-zero); font: 10px var(--mono); }
+    .pix-instructions-list strong, .pix-example strong { color: var(--white); }
+    .pix-example { align-self: start; padding: 22px; border-left: 2px solid var(--cyan); background: rgba(141, 220, 255, .06); }
+    .pix-example span { color: var(--cyan); font: 10px var(--mono); text-transform: uppercase; }
+    .pix-example p { margin: 9px 0 0; color: var(--blue-soft); font: 13px/1.7 var(--mono); overflow-wrap: anywhere; }
+    .pix-example small { display: block; margin-top: 13px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+
     .team-section { padding: 88px 0 92px; }
     .team-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 60px; }
     .team-section h2 { max-width: 430px; margin: 14px 0; font-size: clamp(32px, 4vw, 46px); letter-spacing: -.05em; line-height: 1.05; }
@@ -274,6 +287,7 @@
       .wrap { width: min(100% - 36px, var(--content)); }
       .fundraiser-grid { grid-template-columns: minmax(0, 1fr); }
       .form-shell { min-width: 0; }
+      .pix-instructions-grid { grid-template-columns: 1fr; gap: 25px; }
       .nav { min-height: 66px; }
       .nav-links { gap: 0; }
       .nav-links a:not(.nav-cta) { display: none; }
@@ -309,6 +323,7 @@
       .category-points { gap: 11px; }
       .category-points li { font-size: 10px; }
       .fundraiser { padding: 62px 0 68px; }
+      .pix-instructions { padding: 56px 0 62px; }
       .fundraiser-grid { grid-template-columns: 1fr; gap: 30px; }
       .fundraiser h2 { max-width: 420px; font-size: 44px; }
       .form-shell { padding: 20px 16px; }
@@ -529,6 +544,28 @@
       </div>
     </section>
 
+    <section class="pix-instructions" id="orientacoes-pix" aria-labelledby="pix-instructions-title">
+      <div class="wrap">
+        <span class="eyebrow">Uma informação importante</span>
+        <h2 id="pix-instructions-title">O que escrever na descrição do Pix?</h2>
+        <p class="pix-instructions-intro">A descrição (que também pode aparecer como “mensagem” ou “identificação”) ajuda a equipe a comparar o comprovante com a sua reserva e confirmar o pagamento com mais segurança. Isso evita confusões e ajuda a identificar tentativas de fraude.</p>
+        <div class="pix-instructions-grid">
+          <ol class="pix-instructions-list">
+            <li>No aplicativo do seu banco, escolha a opção para fazer um Pix e cole a chave que você copiou.</li>
+            <li>Confira se o nome de quem vai receber está correto. Depois, informe o valor da sua contribuição.</li>
+            <li>Na tela do pagamento, procure o campo <strong>“Descrição”</strong>, <strong>“Mensagem”</strong> ou <strong>“Identificação”</strong>. Escreva seu <strong>nome completo e os números da rifa escolhidos</strong>.</li>
+            <li>Antes de confirmar, confira o valor, a chave e o texto. Depois do pagamento, envie o comprovante para a equipe.</li>
+          </ol>
+          <div class="pix-example">
+            <span>Exemplo para quem comprou rifa</span>
+            <p>Maria Silva - números 24, 108 e 217</p>
+            <small>Use seu nome completo e troque os números pelos que você escolheu. Se o seu banco não mostrar um campo de descrição, envie essa informação junto com o comprovante.</small>
+            <small>Para doação ou compra de doces, escreva seu nome completo e o tipo de contribuição. Exemplo: “Maria Silva - doação” ou “Maria Silva - 3 doces”.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -557,6 +594,7 @@
     const totalAmount = document.querySelector("#total-amount");
     const status = document.querySelector("#form-status");
     const pixRow = document.querySelector("#pix-row");
+    const pixInstructions = document.querySelector("#orientacoes-pix");
     const phone = document.querySelector("#phone");
     const raffleMap = document.querySelector("#raffle-map");
     const raffleMapStatus = document.querySelector("#raffle-map-status");
@@ -741,6 +779,7 @@
         button.textContent = copied ? "Chave copiada" : "Copie manualmente";
       }
       window.setTimeout(() => { button.textContent = "Copiar chave"; }, 2200);
+      pixInstructions.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     form.addEventListener("submit", async (event) => {
